@@ -32,7 +32,7 @@
                 $genres = $cmd->fetchAll();
 
                 foreach ($genres as $genre) {
-                    echo '<option>' . $genre['name'] . '</option>';
+                    echo '<option value="' . $genre['genreId'] .'">' . $genre['name'] . '</option>';
                 }
 
                 $db = null;

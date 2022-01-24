@@ -10,13 +10,15 @@
         $title = $_POST['title'];
         $rating = $_POST['rating'];
         $releaseYear = $_POST['releaseYear']; 
+        $genreId = $_POST['genreId'];
 
         // connect to the db using our credentials using the PDO library
         // 5 vals required: dbtype / server address / db name / username / password
-        $db = new PDO('mysql:host=127.0.0.1;dbname=phpflix', 'root', '');
+        $db = new PDO('mysql:host=172.31.22.43;dbname=Rich100', 'Rich100', 'x');
 
-        // set up an SQL INSERT command w/placeholders for our 3 values
-        $sql = "INSERT INTO movies (title, rating, releaseYear) VALUES (:title, :rating, :releaseYear)";
+        // set up an SQL INSERT command w/placeholders for our values
+        $sql = "INSERT INTO movies (title, rating, releaseYear, genreId) 
+            VALUES (:title, :rating, :releaseYear, :genreId)";
 
         // create a command object using our db connection & SQL command from above
         // in java syntax is $db.prepare($sql)
@@ -26,6 +28,7 @@
         $cmd->bindParam(':title', $title, PDO::PARAM_STR, 100);
         $cmd->bindParam(':rating', $rating, PDO::PARAM_STR, 10);
         $cmd->bindParam(':releaseYear', $releaseYear, PDO::PARAM_INT);
+        $cmd->bindParam(':genreId', $genreId, PDO::PARAM_INT);
 
         // execute the command to save the movie permanently to our db table
         $cmd->execute();
