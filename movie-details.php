@@ -9,15 +9,15 @@
     <form method="post" action="save-movie.php">
         <fieldset>
             <label for="title">Title:</label>
-            <input name="title" id="title" required />
+            <input name="title" id="title" required maxlength="100" />
         </fieldset>
         <fieldset>
             <label for="rating">Rating:</label>
-            <input name="rating" id="rating" />
+            <input name="rating" id="rating" required maxlength="10" />
         </fieldset>
         <fieldset>
             <label for="releaseYear">Release Year:</label>
-            <input name="releaseYear" id="releaseYear" />
+            <input name="releaseYear" id="releaseYear" type="number" min="1900" max="3000" required />
         </fieldset>
         <fieldset>
             <label for="genreId">Genre:</label>
