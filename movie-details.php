@@ -9,7 +9,7 @@
     <form method="post" action="save-movie.php">
         <fieldset>
             <label for="title">Title:</label>
-            <input name="title" id="title" />
+            <input name="title" id="title" required />
         </fieldset>
         <fieldset>
             <label for="rating">Rating:</label>

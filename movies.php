@@ -6,6 +6,7 @@
     </head>
     <body>
         <h1>Movies</h1>
+        <a href="movie-details.php">Add a New Movie</a>
         <table border="1" width="100%">
             <thead>
                 <tr>
