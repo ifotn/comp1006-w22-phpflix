@@ -13,6 +13,7 @@
     $rating = $_POST['rating'];
     $releaseYear = $_POST['releaseYear'];
     $genreId = $_POST['genreId'];
+    $movieId = $_POST['movieId']; // null when inserting, numeric when updating
     $ok = true;  // default value indicating if form inputs are valid or not
 
     // input validation checking - must have no errors before saving
@@ -45,11 +46,18 @@
     if ($ok == true) {
         // connect to the db using our credentials using the PDO library
         // 5 vals required: dbtype / server address / db name / username / password
-        $db = new PDO('mysql:host=172.31.22.43;dbname=Rich100', 'Rich100', 'Vda787-KJ_');
+        require 'db.php';
 
-        // set up an SQL INSERT command w/placeholders for our values
-        $sql = "INSERT INTO movies (title, rating, releaseYear, genreId) 
-            VALUES (:title, :rating, :releaseYear, :genreId)";
+        // if we have no movieId, insert.  if we already have a movieId, update instead.
+        if (empty($movieId)) {
+            // set up an SQL INSERT command w/placeholders for our values
+            $sql = "INSERT INTO movies (title, rating, releaseYear, genreId) 
+                VALUES (:title, :rating, :releaseYear, :genreId)";
+        }
+        else {
+            $sql = "UPDATE movies SET title = :title, rating = :rating, releaseYear = :releaseYear,
+                genreId = :genreId WHERE movieId = :movieId";
+        }
 
         // create a command object using our db connection & SQL command from above
         // in java syntax is $db.prepare($sql)
@@ -60,6 +68,10 @@
         $cmd->bindParam(':rating', $rating, PDO::PARAM_STR, 10);
         $cmd->bindParam(':releaseYear', $releaseYear, PDO::PARAM_INT);
         $cmd->bindParam(':genreId', $genreId, PDO::PARAM_INT);
+        // if we have a movieId, we need to bind it as a 5th parameter
+        if (isset($movieId)) {
+            $cmd->bindParam(':movieId', $movieId, PDO::PARAM_INT);
+        }
 
         // execute the command to save the movie permanently to our db table
         $cmd->execute();
@@ -68,7 +80,10 @@
         $db = null;
 
         // show a confirmation message
-        echo "Movie Saved";
+        echo '<h1>Movie Saved</h1>
+            <div class="alert alert-info">
+                <a href="movies.php">Back to Movie List</a>
+            </div>';
     }
     ?>
 </body>

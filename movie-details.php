@@ -87,6 +87,7 @@ if (isset($_GET['movieId'])) {
                     ?>
                 </select>
             </fieldset>
+            <input name="movieId" id="movieId" value="<?php echo $movieId; ?>" type="hidden" />
             <button class="offset-1 btn btn-secondary">Save</button>
         </form>
     </main>
