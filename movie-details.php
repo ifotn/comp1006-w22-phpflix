@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <title>Movie Details</title>
@@ -14,7 +13,6 @@
     <!-- Custom CSS -->
     <link href="css/styles.css" rel="stylesheet">
 </head>
-
 <body>
     <main class="container">
         <h1>Movie Details</h1>
@@ -36,8 +34,7 @@
                 <label for="genreId" class="col-1">Genre:</label>
                 <select name="genreId" id="genreId">
                     <?php
-                    $db = new PDO('mysql:host=172.31.22.43;dbname=Rich100', 'Rich100', 'x');
-                    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                    require 'db.php';
 
                     $sql = "SELECT * FROM genres";
                     $cmd = $db->prepare($sql);

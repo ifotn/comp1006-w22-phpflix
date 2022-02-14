@@ -10,7 +10,7 @@
         $name = $_POST['name'];
 
         // connect: new PDO('mysql:host=172.31.22.43;dbname=YOUR-DB-NAME', 'YOUR-USERNAME', 'YOUR-PASSWORD');
-        $db = new PDO('mysql:host=172.31.22.43;dbname=Rich100', 'Rich100', 'x');
+        require 'db.php';
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         // set up SQL and command object

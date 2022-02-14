@@ -7,8 +7,7 @@
     <body>
         <?php
         // connect
-        $db = new PDO('mysql:host=172.31.22.43;dbname=Rich100', 'Rich100', 'x');
-        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        require 'db.php';
 
         // set up SQL query to fetch the genres from the genres table in the db
         $sql = "SELECT * FROM genres";

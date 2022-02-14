@@ -45,7 +45,7 @@
     if ($ok == true) {
         // connect to the db using our credentials using the PDO library
         // 5 vals required: dbtype / server address / db name / username / password
-        $db = new PDO('mysql:host=172.31.22.43;dbname=Rich100', 'Rich100', 'x');
+        $db = new PDO('mysql:host=172.31.22.43;dbname=Rich100', 'Rich100', 'Vda787-KJ_');
 
         // set up an SQL INSERT command w/placeholders for our values
         $sql = "INSERT INTO movies (title, rating, releaseYear, genreId) 
