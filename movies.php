@@ -29,7 +29,7 @@
            </thead>                
            <tbody>
                <?php
-                $db = new PDO('mysql:host=172.31.22.43;dbname=Rich100', 'Rich100', 'Vda787-KJ_');
+               require 'db.php';
                 $sql = "SELECT * FROM movies INNER JOIN genres ON movies.genreId = genres.genreId";
 
                 $cmd = $db->prepare($sql);
@@ -39,7 +39,10 @@
                 // loop through the records, new row for each record, new column for each value
                 foreach ($movies as $movie) {
                     echo '<tr>
-                        <td>' . $movie['title'] . '</td>
+                        <td>
+                            <a href="movie-details.php?movieId=' . $movie['movieId'] . '">' .                            
+                             $movie['title'] . '</a>
+                        </td>
                         <td>' . $movie['rating'] . '</td>
                         <td>' . $movie['releaseYear'] . '</td>
                         <td>' . $movie['name'] . '</td>
