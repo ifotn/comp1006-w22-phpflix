@@ -2,35 +2,40 @@
 $title = 'Movie Details';
 require 'includes/header.php';
 
-// check for movieId in URL.  If there is 1, fetch selected movie from db for display
-$movieId = null;
-$title = null;
-$rating = null;
-$releaseYear = null;
-$genreId = null;
+try {
+    // check for movieId in URL.  If there is 1, fetch selected movie from db for display
+    $movieId = null;
+    $title = null;
+    $rating = null;
+    $releaseYear = null;
+    $genreId = null;
 
-if (isset($_GET['movieId'])) {
-    if (is_numeric($_GET['movieId'])) {
-        // if we have number in url, store in a variable
-        $movieId = $_GET['movieId'];
+    if (isset($_GET['movieId'])) {
+        if (is_numeric($_GET['movieId'])) {
+            // if we have number in url, store in a variable
+            $movieId = $_GET['movieId'];
 
-        require 'includes/db.php';
-        $sql = "SELECT * FROM movies WHERE movieId = :movieId";
-        $cmd = $db->prepare($sql);
-        $cmd->bindParam(':movieId', $movieId, PDO::PARAM_INT);
-        $cmd->execute();
+            require 'includes/db.php';
+            $sql = "SELECT * FROM movies WHERE movieId = :movieId";
+            $cmd = $db->prepare($sql);
+            $cmd->bindParam(':movieId', $movieId, PDO::PARAM_INT);
+            $cmd->execute();
 
-        // use the PDO fetch command instead of fetchAll as we are only getting 1 row not many
-        $movie = $cmd->fetch();
-        $title = $movie['title'];
-        $rating = $movie['rating'];
-        $releaseYear = $movie['releaseYear'];
-        $genreId = $movie['genreId'];
+            // use the PDO fetch command instead of fetchAll as we are only getting 1 row not many
+            $movie = $cmd->fetch();
+            $title = $movie['title'];
+            $rating = $movie['rating'];
+            $releaseYear = $movie['releaseYear'];
+            $genreId = $movie['genreId'];
 
-        $db = null;
+            $db = null;
+        }
     }
 }
-
+catch (Exception $error) {
+    // an error happened so redirect to the error page
+    header('location:error.php');
+}
 ?>
 
     <main class="container">
@@ -54,24 +59,30 @@ if (isset($_GET['movieId'])) {
                 <label for="genreId" class="col-1">Genre:</label>
                 <select name="genreId" id="genreId">
                     <?php
-                    require 'includes/db.php';
+                    try {
+                        require 'includes/db.php';
 
-                    $sql = "SELECT * FROM genres";
-                    $cmd = $db->prepare($sql);
-                    $cmd->execute();
-                    $genres = $cmd->fetchAll();
+                        $sql = "SELECT * FROM genres";
+                        $cmd = $db->prepare($sql);
+                        $cmd->execute();
+                        $genres = $cmd->fetchAll();
 
-                    foreach ($genres as $genre) {
-                        if ($genre['genreId'] == $genreId) {
-                            // if current Genre matches the Genre of the movie we are editing, select this option
-                            echo '<option selected value="' . $genre['genreId'] . '">' . $genre['name'] . '</option>';     
+                        foreach ($genres as $genre) {
+                            if ($genre['genreId'] == $genreId) {
+                                // if current Genre matches the Genre of the movie we are editing, select this option
+                                echo '<option selected value="' . $genre['genreId'] . '">' . $genre['name'] . '</option>';     
+                            }
+                            else {
+                            echo '<option value="' . $genre['genreId'] . '">' . $genre['name'] . '</option>'; 
+                            }                       
                         }
-                        else {
-                           echo '<option value="' . $genre['genreId'] . '">' . $genre['name'] . '</option>'; 
-                        }                       
-                    }
 
-                    $db = null;
+                        $db = null;
+                    }
+                    catch (Exception $error) {
+                        // an error happened so redirect to the error page
+                        header('location:error.php');
+                    }
                     ?>
                 </select>
             </fieldset>

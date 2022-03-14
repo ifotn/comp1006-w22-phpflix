@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+$title = 'Saving Movie Details...';
+require 'includes/header.php';
 
-<head>
-    <meta charset="UTF-8" />
-    <title>Saving Movie Details...</title>
-</head>
-
-<body>
-    <?php
+try {
     // capture form inputs from the POST array and store each 1 in variable
     $title = $_POST['title'];
     $rating = $_POST['rating'];
@@ -46,7 +41,7 @@
     if ($ok == true) {
         // connect to the db using our credentials using the PDO library
         // 5 vals required: dbtype / server address / db name / username / password
-        require 'db.php';
+        require 'includes/db.php';
 
         // if we have no movieId, insert.  if we already have a movieId, update instead.
         if (empty($movieId)) {
@@ -85,6 +80,11 @@
                 <a href="movies.php">Back to Movie List</a>
             </div>';
     }
+}
+catch (Exception $error) {
+    // an error happened so redirect to the error page
+    header('location:error.php');
+}
     ?>
 </body>
 
