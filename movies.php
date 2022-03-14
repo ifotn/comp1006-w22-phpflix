@@ -1,20 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <title>Movies</title>
-        <!-- Bootstrap CDN -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-        <script src="js/scripts.js" type="text/javascript" defer></script>
-        <!-- Google Font -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet"> 
-        <!-- Custom CSS -->
-        <link href="css/styles.css" rel="stylesheet">
-    </head>
-    <body>
+<?php 
+require 'includes/header.php';
+?>
         <h1>Movies</h1>
         <a href="movie-details.php">Add a New Movie</a>
         <table class="table table-striped table-hover">
@@ -29,7 +15,7 @@
            </thead>                
            <tbody>
                <?php
-               require 'db.php';
+               require 'includes/db.php';
                 $sql = "SELECT * FROM movies INNER JOIN genres ON movies.genreId = genres.genreId";
 
                 $cmd = $db->prepare($sql);
