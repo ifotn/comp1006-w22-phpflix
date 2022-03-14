@@ -1,4 +1,5 @@
 <?php 
+$title = 'Movies';
 require 'includes/header.php';
 ?>
         <h1>Movies</h1>
@@ -15,33 +16,39 @@ require 'includes/header.php';
            </thead>                
            <tbody>
                <?php
-               require 'includes/db.php';
-                $sql = "SELECT * FROM movies INNER JOIN genres ON movies.genreId = genres.genreId";
+                try {
+                    require 'includes/db.php';
+                    $sql = "SELECT * FROM movies INNER JOIN genres ON movies.genreId = genres.genreId";
 
-                $cmd = $db->prepare($sql);
-                $cmd->execute();
-                $movies = $cmd->fetchAll();
+                    $cmd = $db->prepare($sql);
+                    $cmd->execute();
+                    $movies = $cmd->fetchAll();
 
-                // loop through the records, new row for each record, new column for each value
-                foreach ($movies as $movie) {
-                    echo '<tr>
-                        <td>
-                            <a href="movie-details.php?movieId=' . $movie['movieId'] . '">' .                            
-                             $movie['title'] . '</a>
-                        </td>
-                        <td>' . $movie['rating'] . '</td>
-                        <td>' . $movie['releaseYear'] . '</td>
-                        <td>' . $movie['name'] . '</td>
-                        <td>
-                            <a class="btn btn-danger" 
-                                onclick="return confirmDelete()"
-                                href="delete-movie.php?movieId=' . $movie['movieId'] . '">
-                                Delete
-                            </a>
-                        </td>
-                        </tr>';
+                    // loop through the records, new row for each record, new column for each value
+                    foreach ($movies as $movie) {
+                        echo '<tr>
+                            <td>
+                                <a href="movie-details.php?movieId=' . $movie['movieId'] . '">' .                            
+                                $movie['title'] . '</a>
+                            </td>
+                            <td>' . $movie['rating'] . '</td>
+                            <td>' . $movie['releaseYear'] . '</td>
+                            <td>' . $movie['name'] . '</td>
+                            <td>
+                                <a class="btn btn-danger" 
+                                    onclick="return confirmDelete()"
+                                    href="delete-movie.php?movieId=' . $movie['movieId'] . '">
+                                    Delete
+                                </a>
+                            </td>
+                            </tr>';
+                    }
+                    $db = null;
                 }
-                $db = null;
+                catch (Exception $error) {
+                    // an error happened so redirect to the error page
+                    header('location:error.php');
+                }
                 ?>
            </tbody> 
         </table>

@@ -1,4 +1,5 @@
 <?php
+$title = 'Movie Details';
 require 'includes/header.php';
 
 // check for movieId in URL.  If there is 1, fetch selected movie from db for display
