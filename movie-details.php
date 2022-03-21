@@ -81,6 +81,8 @@ catch (Exception $error) {
                     }
                     catch (Exception $error) {
                         // an error happened so redirect to the error page
+                        // if we get a Headers Already Sent error, use js redirect instead w/location.href
+                        //echo '<script>location.href="error.php";</script>';
                         header('location:error.php');
                     }
                     ?>
