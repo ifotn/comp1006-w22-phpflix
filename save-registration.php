@@ -26,16 +26,36 @@ if ($password != $confirm) {
 
 if ($ok) {
     // connect
+    require 'includes/db.php';
 
     // check for duplicate user
+    $sql = "SELECT * FROM users WHERE username = :username";
+    $cmd = $db->prepare($sql);
+    $cmd->bindParam(':username', $username, PDO::PARAM_STR, 50);
+    $cmd->execute();
+    $user = $cmd->fetch();
 
-    // hash password
+    if ($user) {
+        echo '<p class="alert alert-warning">User already exists.</p>';
+        $db = null;
+    }
+    else {
+         // hash password: e.g. Password1234 => 98as7r42234oiml23i4u79823nmlfw7usd98faDfaj98dfuef
+    $password = password_hash($password, PASSWORD_DEFAULT);
 
     // save new user
+    $sql = "INSERT INTO users (username, password) VALUES (:username, :password)";
+    $cmd = $db->prepare($sql);
+    $cmd->bindParam(':username', $username, PDO::PARAM_STR, 50);
+    $cmd->bindParam(':password', $password, PDO::PARAM_STR, 255);
+    $cmd->execute();
 
     // disconnect
+    $db = null;
+    echo '<p class="alert alert-secondary">Registration Saved</p>';
 
     // redirect to login
+    }
 }
 ?>
 

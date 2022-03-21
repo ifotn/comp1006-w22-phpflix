@@ -5,6 +5,9 @@ require 'includes/header.php';
 
 <main class="container">
     <h1>User Registration</h1>
+    <h6 class="alert alert-secondary">Passwords must be a minimum of 8 characters, 
+        including 1 digit, 1 upper-case letter, and 1 lower-case letter.
+    </h6>
     <form method="post" action="save-registration.php">
         <fieldset class="m-1">
             <label for="username" class="col-2">Username:</label>
