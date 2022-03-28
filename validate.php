@@ -18,19 +18,21 @@ if (!$user) {
     $db = null;
     header('location:login.php?invalid=true');
 }
-
-// if username found, use a built-in php method to hash and compare passwords 
-if (!password_verify($password, $user['password'])) {
-    // if passwords don't match, display login page w/error
-    $db = null;
-    header('location:login.php?invalid=true');
-} 
-
-// if passwords match, store user identity in a SESSION object; redirect user to movies page
-// we must call session_start() before using session vars in PHP
-// store username in a session var so we can access it on any page
-session_start(); 
-$_SESSION['username'] = $username;
-$db = null;
-header('location:movies.php');
+else {
+    // if username found, use a built-in php method to hash and compare passwords 
+    if (!password_verify($password, $user['password'])) {
+        // if passwords don't match, display login page w/error
+        $db = null;
+        header('location:login.php?invalid=true');
+    } 
+    else {
+        // if passwords match, store user identity in a SESSION object; redirect user to movies page
+        // we must call session_start() before using session vars in PHP
+        // store username in a session var so we can access it on any page
+        session_start(); 
+        $_SESSION['username'] = $username;
+        $db = null;
+        header('location:movies.php');
+    }
+}
 ?>

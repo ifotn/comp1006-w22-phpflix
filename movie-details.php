@@ -1,4 +1,6 @@
 <?php
+// auth check
+require 'includes/auth.php';
 $title = 'Movie Details';
 require 'includes/header.php';
 

@@ -27,12 +27,30 @@
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="movies.php">Movies</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="register.php">Register</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="login.php">Login</a>
-                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <?php
+                    // access the current session if not already accessed
+                    if (session_status() == PHP_SESSION_NONE) {
+                        session_start();
+                    }                       
+                    if (empty($_SESSION['username'])) {
+                        echo '<li class="nav-item">
+                                <a class="nav-link" href="register.php">Register</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="login.php">Login</a>
+                            </li>';
+                    }    
+                    else {
+                        echo '<li class="nav-item">
+                                <a class="nav-link" href="#">' . $_SESSION['username'] . '</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="logout.php">Logout</a>
+                            </li>';
+                    }
+                    ?>
                 </ul>
             </div>
         </div>
