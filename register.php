@@ -25,7 +25,7 @@ require 'includes/header.php';
                 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" />
         </fieldset>
         <div class="offset-2">
-            <button class="btn btn-secondary">Register</button>
+            <button class="btn btn-secondary" onclick="return comparePasswords()">Register</button>
         </div>
     </form>
 </main>

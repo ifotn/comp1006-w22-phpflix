@@ -18,3 +18,16 @@ function showHidePassword() {
         icon.src = 'img/show.png'
     }
 }
+
+function comparePasswords() {
+    let password = document.getElementById('password').value
+    let confirm = document.getElementById('confirm').value
+
+    if (password == confirm) {
+        return true
+    }
+    else {
+        alert('Passwords do not match')
+        return false
+    }
+}
