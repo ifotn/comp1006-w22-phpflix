@@ -1,4 +1,5 @@
 <?php
+require 'includes/auth.php';
 $title = 'Deleting Movie...';
 require 'includes/header.php';
 

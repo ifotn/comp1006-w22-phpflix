@@ -1,4 +1,5 @@
 <?php
+require 'includes/auth.php';
 $title = 'Saving Movie Details...';
 require 'includes/header.php';
 
@@ -64,7 +65,7 @@ try {
         $cmd->bindParam(':releaseYear', $releaseYear, PDO::PARAM_INT);
         $cmd->bindParam(':genreId', $genreId, PDO::PARAM_INT);
         // if we have a movieId, we need to bind it as a 5th parameter
-        if (isset($movieId)) {
+        if (!empty($movieId)) {
             $cmd->bindParam(':movieId', $movieId, PDO::PARAM_INT);
         }
 

@@ -33,7 +33,7 @@
                     // access the current session if not already accessed
                     if (session_status() == PHP_SESSION_NONE) {
                         session_start();
-                    }                       
+                    }     
                     if (empty($_SESSION['username'])) {
                         echo '<li class="nav-item">
                                 <a class="nav-link" href="register.php">Register</a>
