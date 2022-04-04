@@ -43,7 +43,7 @@ catch (Exception $error) {
     <main class="container">
         <h1>Movie Details</h1>
         <h5 class="alert alert-info">Please complete all fields.</h5>
-        <form method="post" action="save-movie.php">
+        <form method="post" action="save-movie.php" enctype="multipart/form-data">
             <fieldset class="m-1">
                 <label for="title" class="col-1">Title:</label>
                 <input name="title" id="title" required maxlength="100" value="<?php echo $title; ?>" />
@@ -89,6 +89,10 @@ catch (Exception $error) {
                     }
                     ?>
                 </select>
+            </fieldset>
+            <fieldset class="m-1">
+                    <label for="image" class="col-1">Image:</label>
+                    <input type="file" name="image" id="image" accept=".png,.jpg" />
             </fieldset>
             <input name="movieId" id="movieId" value="<?php echo $movieId; ?>" type="hidden" />
             <button class="offset-1 btn btn-secondary">Save</button>
