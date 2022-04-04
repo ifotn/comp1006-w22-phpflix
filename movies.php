@@ -16,6 +16,7 @@ require 'includes/header.php';
                     <th>Rating</th>
                     <th>Release Year</th>
                     <th>Genre</th>
+                    <th></th>
                     <?php
                     // we don't need to call session_start() first because we already called it in the header above
                     if (!empty($_SESSION['username'])) {
@@ -48,7 +49,15 @@ require 'includes/header.php';
                             echo '</td>
                                 <td>' . $movie['rating'] . '</td>
                                 <td>' . $movie['releaseYear'] . '</td>
-                                <td>' . $movie['name'] . '</td>';
+                                <td>' . $movie['name'] . '</td>
+                                <td>';
+
+                        if (!empty($movie['image'])) {
+                            echo '<img src="img/'. $movie['image'] . '" alt="Movie Poster" class="thumb" />';
+                        }
+
+                            echo '</td>';
+
                         if (!empty($_SESSION['username'])) {                        
                             echo '<td>
                                 <a class="btn btn-danger" 

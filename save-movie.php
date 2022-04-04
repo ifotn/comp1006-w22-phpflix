@@ -60,6 +60,10 @@ try {
         // move from cache to img with new unique name
         move_uploaded_file($image['tmp_name'], 'img/' . $name);
     }
+    else {
+        // no new image uploaded. if movie already has an image attached, keep the name so it doesn't get deleted
+        $name = $_POST['currentImage'];
+    }
 
     // if ok is STILL true, all inputs valid so connect & save
     if ($ok == true) {

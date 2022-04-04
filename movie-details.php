@@ -11,6 +11,7 @@ try {
     $rating = null;
     $releaseYear = null;
     $genreId = null;
+    $image = null;
 
     if (isset($_GET['movieId'])) {
         if (is_numeric($_GET['movieId'])) {
@@ -29,6 +30,7 @@ try {
             $rating = $movie['rating'];
             $releaseYear = $movie['releaseYear'];
             $genreId = $movie['genreId'];
+            $image = $movie['image'];
 
             $db = null;
         }
@@ -94,7 +96,13 @@ catch (Exception $error) {
                     <label for="image" class="col-1">Image:</label>
                     <input type="file" name="image" id="image" accept=".png,.jpg" />
             </fieldset>
+            <?php
+                if (!empty($image)) {
+                    echo '<div><img src="img/' . $image . '" alt="Movie Poster" class="offset-1 m-1" /></div>';
+                }
+            ?>
             <input name="movieId" id="movieId" value="<?php echo $movieId; ?>" type="hidden" />
+            <input name="currentImage" id="currentImage" value="<?php echo $image; ?>" type="hidden" />
             <button class="offset-1 btn btn-secondary">Save</button>
         </form>
     </main>
