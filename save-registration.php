@@ -24,6 +24,24 @@ if ($password != $confirm) {
     $ok = false;
 }
 
+// recaptcha validation 
+$apiUrl = 'https://www.google.com/recaptcha/api/siteverify';
+$secret = '6LfffmUfAAAAAEZME5kARxQMRo3z_WiU7-FM-ZNJ';
+$response = $_POST['g-recaptcha-response'];
+
+// call the recaptcha API using PHP's file_get_contents() method - a hidden HTTP call in code invisible to user
+$apiResponse = file_get_contents($apiUrl . "?secret=$secret&response=$response");
+
+// decode json response
+$recaptchaResponse = json_decode($apiResponse);
+//echo $apiResponse;
+
+// check if api shows bot (0.0) or a human (1.0)
+if ($recaptchaResponse->success != "true") {
+    echo 'Are you human?';
+    $ok = false; // recaptcha fails. either error or scored as a bot
+}
+
 if ($ok) {
     // connect
     require 'includes/db.php';
