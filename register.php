@@ -8,7 +8,7 @@ require 'includes/header.php';
     <h6 class="alert alert-secondary">Passwords must be a minimum of 8 characters, 
         including 1 digit, 1 upper-case letter, and 1 lower-case letter.
     </h6>
-    <form method="post" action="save-registration.php">
+    <form method="post" action="save-registration.php" id="register-form">
         <fieldset class="m-1">
             <label for="username" class="col-2">Username:</label>
             <input name="username" id="username" required type="email" placeholder="email@email.com" />
@@ -25,10 +25,22 @@ require 'includes/header.php';
                 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" />
         </fieldset>
         <div class="offset-2">
-            <button class="btn btn-secondary" onclick="return comparePasswords()">Register</button>
+            <button class="btn btn-secondary g-recaptcha" 
+                data-sitekey="6LfffmUfAAAAAPT-MKey3AQoaohQ-nLiKWvbr9I7" 
+                data-callback='onSubmit' 
+                data-action='submit'
+                onclick="return comparePasswords()">Register</button>
         </div>
     </form>
 </main>
+<!-- Recaptcha API -->
+<script src="https://www.google.com/recaptcha/api.js"></script>
+
+<script>
+    function onSubmit(token) {
+        document.getElementById("register-form").submit();
+    }
+</script>
 
 </body>
 </html>

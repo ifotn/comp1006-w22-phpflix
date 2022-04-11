@@ -29,6 +29,7 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
+                    <!-- weather widget start --><a target="_blank" href="https://www.booked.net/weather/barrie-26910"><img src="https://w.bookcdn.com/weather/picture/26_26910_1_1_95a5a6_250_7f8c8d_ffffff_ffffff_1_2071c9_ffffff_0_6.png?scode=2&domid=w209&anc_id=49965" alt="booked.net"/></a><!-- weather widget end -->
                     <?php
                     // access the current session if not already accessed
                     if (session_status() == PHP_SESSION_NONE) {
